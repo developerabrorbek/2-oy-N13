@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Task Manager</h1>
+        <div class="search-container">
+            <input type="file" multiple id="taskInput" placeholder="Enter new Task">
+            <button id="post" onclick="createTask()">Create</button>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search by ID">
+            <button id="search" onclick="searchTask()">Search</button>
+            <button id="show" onclick="showAllTasks()">Show All</button>
+        </div>
+        <div id="tasksContainer" class="tasks-container"></div>
+        <div class="modal">
+            <input type="text" id="updateTask">
+            <button id="update" class="update-button">Update</button>
+            <button class="close-button" onclick="closeOverlay()">Close</button>
+        </div>
+    </div>
+    <script type="module" src="./js/functions.js"></script>
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
+ 
