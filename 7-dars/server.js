@@ -29,7 +29,7 @@ app.post("/create", (req, res) => {
 
   writeFileCustom(path.join(__dirname, "data", "users.json"), allUsers);
 
-  res.render("index", { users: allUsers });
+  res.render("users", { users: allUsers });
 });
 
 app.listen(3000, () => {

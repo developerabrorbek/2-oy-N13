@@ -1,14 +1,38 @@
 [
-  {
-    "name": "Xolodilnik",
-    "phone": "asxasxasx",
-    "password": "admin",
-    "id": 1
-  },
-  {
-    "name": "api",
-    "phone": "asxasxasx",
-    "password": "shox_11",
-    "id": 4
-  }
+    {
+        "name": "Xolodilnik",
+        "phone": "asxasxasx",
+        "password": "admin",
+        "id": 1
+    },
+    {
+        "name": "api",
+        "phone": "asxasxasx",
+        "password": "shox_11",
+        "id": 4
+    },
+    {
+        "name": "Timurbek",
+        "phone": "+998 93 846 24 10",
+        "password": "jscjsjncdjsd",
+        "id": 5
+    },
+    {
+        "name": "Timurbek",
+        "phone": "+998 93 846 24 10",
+        "password": "jscjsjncdjsd",
+        "id": 6
+    },
+    {
+        "name": "Timurbek",
+        "phone": "+998 93 846 24 10",
+        "password": "scjnjnjncs",
+        "id": 7
+    },
+    {
+        "name": "Timurbek",
+        "phone": "+998 93 846 24 10",
+        "password": "scjnjnjncs",
+        "id": 8
+    }
 ]
