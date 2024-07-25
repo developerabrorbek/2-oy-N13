@@ -1,0 +1,18 @@
+git init 
+
+git add .
+
+git commit -m "1-commit"
+
+git push origin repository_url
+
+git branch -M main
+
+git push origin main
+
+
+
+
+// loyihani ko'chirib olish
+
+git clone loyiha_urli

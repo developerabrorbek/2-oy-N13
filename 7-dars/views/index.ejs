@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7-dars</title>
+    <script>
+      console.log("salom");
+    </script>
+
+    <style>
+      body {
+        background-color: aqua;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Salom serverdan</h1>
+
+    <form action="/create" method="post">
+      <input
+        type="text"
+        required
+        name="name"
+        placeholder="ismingizni kiriting:"
+      />
+      <input
+        type="text"
+        required
+        name="phone"
+        placeholder="Telefon  kiriting:"
+      />
+      <input
+        type="text"
+        required
+        name="password"
+        placeholder="Password kiriting:"
+      />
+      <button type="submit">Jo'natish</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>№</th>
+          <th>Name</th>
+          <th>Password</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% users.forEach((u) => { %>
+        <tr>
+          <td><%= u.id %></td>
+          <td><%= u.name %></td>
+          <td><%= u.password %></td>
+          <td><%= u.phone %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>

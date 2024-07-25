@@ -1,11 +1,13 @@
 {
   "type": "commonjs",
   "scripts": {
-    "start:dev": "node --watch backend/main.js"
+    "start:dev": "node --watch 7-dars/server.js"
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "nodemon": "^3.1.4"
   }
