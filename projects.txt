@@ -1,0 +1,13 @@
+1. Online do'kon
+2. LMS -> o'quv markaz uchun
+3. Bankist app
+4. Netflix clone 
+5. Chat app
+6. Portfolio app
+7. Blog app
+8. Online course 
+9. Video streaming 
+10. Quizz app
+11. E-book library
+12. E'lon sayti
+

@@ -11,6 +11,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.get("/students", (req, res) => {
+  res.send(readFileCustom(path.join(__dirname, "data", "student.json")));
+});
+
+app.get("/students/:studentId", (req, res) => {
+  const allSudents = readFileCustom(
+    path.join(__dirname, "data", "student.json")
+  );
+
+  const foundedStudent = allSudents.find((s) => s.id == req.params.studentId);
+
+  
+  res.send(foundedStudent);
+});
+
 app.get("/", (req, res) => {
   const allUsers = readFileCustom(path.join(__dirname, "data", "users.json"));
 

@@ -1,0 +1,13 @@
+[
+  {
+    "id":1,
+    "first_name": "John",
+    "last_name": "Smith",
+    "password": "1234",
+    "username": "john_student",
+    "birth_date": "02-02-2000",
+    "image_url": null,
+    "phone_number": "998939639696",
+    "created_at": "05-08-2024"
+  }
+]

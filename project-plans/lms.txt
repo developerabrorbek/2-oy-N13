@@ -1,0 +1,38 @@
+Learning management system -> O'quv markaz uchun
+
+Authentification:
+  login
+  parol
+
+O'quv markaz asosi (modellar): 
+  o'quvchi
+  guruh
+  yo'nalish
+  o'qituvchi
+  admin
+  xona
+
+O'quvchi modeli:  (izoh: ? -> ixtiyoriy degani)
+  id: unique
+  firstName: ismi
+  lastName?: string
+  password: string 
+  username: string
+  phone_number: string (998939639696)
+  birth_date: string
+  image_url?: string
+  created_at: Datetime
+
+O'quvchi amallari (actions) :
+  vazifa yuklaydi + comment -> POST
+  videolani ko'ra oladi   -> GET
+  o'quvchilar reytingini ko'ra oladi  -> GET
+  vazifani yuklab ola oladi  -> GET
+  vazifani update qila oladi (vazifa yopilguncha)  -> PATCH
+  profilni ko'ra oladi  -> GET
+  guruhlari haqida ma'lumot ko'ra oladi  -> GET
+  to'lovlar tarixini ko'ra oladi  -> GET
+  profile yangilay oladi   -> PATCH
+
+
+
