@@ -15,21 +15,22 @@
     </style>
   </head>
   <body>
-    <h1>Salom serverdan</h1>
-
     <form action="/create" method="post">
+      <label for="name">Ismingiz</label>
       <input
         type="text"
         required
         name="name"
         placeholder="ismingizni kiriting:"
       />
+      <label for="">Phone</label>
       <input
         type="text"
         required
         name="phone"
         placeholder="Telefon  kiriting:"
       />
+      <label for="">Password</label>
       <input
         type="text"
         required
@@ -38,26 +39,5 @@
       />
       <button type="submit">Jo'natish</button>
     </form>
-    <table>
-      <thead>
-        <tr>
-          <th>№</th>
-          <th>Name</th>
-          <th>Password</th>
-          <th>Phone</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% users.forEach((u) => { %>
-        <tr>
-          <td><%= u.id %></td>
-          <td><%= u.name %></td>
-          <td><%= u.password %></td>
-          <td><%= u.phone %></td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
   </body>
 </html>
