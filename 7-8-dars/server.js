@@ -2,6 +2,8 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const { readFileCustom, writeFileCustom } = require("./utils/fs");
+const { getAllStudents, getSingleStudentById } = require("./controllers/student.controller");
+const userRoutes = require("./routes/student.routes");
 
 const app = express();
 
@@ -11,20 +13,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.get("/students", (req, res) => {
-  res.send(readFileCustom(path.join(__dirname, "data", "student.json")));
-});
+// app.get("/students", (req, res) => {
+//   // res.send(readFileCustom(path.join(__dirname, "data", "student.json")));
+// });
 
-app.get("/students/:studentId", (req, res) => {
-  const allSudents = readFileCustom(
-    path.join(__dirname, "data", "student.json")
-  );
+// app.get("/students", getAllStudents)
 
-  const foundedStudent = allSudents.find((s) => s.id == req.params.studentId);
+// app.get("/students/:studentId", getSingleStudentById);
 
-  
-  res.send(foundedStudent);
-});
+app.use("/students", userRoutes)
+
+
+
+
+
+
+
 
 app.get("/", (req, res) => {
   const allUsers = readFileCustom(path.join(__dirname, "data", "users.json"));
