@@ -1,7 +1,7 @@
 {
   "type": "commonjs",
   "scripts": {
-    "start:dev": "node --watch 7-dars/server.js"
+    "start:dev": "node --watch 6-dars/backend/main.js"
   },
   "dependencies": {
     "axios": "^1.7.2",
