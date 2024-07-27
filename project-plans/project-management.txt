@@ -1,0 +1,6 @@
+Project management -> 
+  1. Izlanish
+  2. Loyihalash
+  3. Kodlash
+  4. Testlash
+  5. Yangilash
