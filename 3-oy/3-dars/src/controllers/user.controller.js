@@ -27,7 +27,7 @@ class UserController {
         .sort("first_name")
         .limitFields()
         .paginate()
-        .getQuery();
+        .getQuery().populate("products", "_id title price");
 
       res.send({
         message: "success",

@@ -10,7 +10,7 @@ class ProductController {
 
   getAllProducts = async (req, res) => {
     const query = { ...req.query };
-
+    
     // GET ALL FILTERED PRODUCTS COUNT
     const allResults = await new ApiFeature(this.#_productModel.find(), query)
       .filter()
@@ -25,7 +25,7 @@ class ProductController {
       .sort("price")
       .limitFields()
       .paginate()
-      .getQuery();
+      .getQuery().populate("user", "_id first_name");
 
     res.send({
       message: "success",
@@ -44,17 +44,17 @@ class ProductController {
             $gte: 3,
           },
           price: {
-            $lt: 5000000
+            $lt: 5000000,
           },
-          title: /^a/
+          title: /^a/,
         },
       },
       {
         $group: {
-          _id:  "$color",
+          _id: "$color",
           soni: { $sum: 1 },
-          avgPrice: { $avg: "$price"},
-          minProductPrice: { $min: "$price"},
+          avgPrice: { $avg: "$price" },
+          minProductPrice: { $min: "$price" },
         },
       },
       {
@@ -68,6 +68,12 @@ class ProductController {
       message: "success",
       data: statistics,
     });
+  };
+
+  createProduct = async (req, res) => {
+    await this.#_productModel.create(req.body);
+
+    res.status(201).send({ message: "success" });
   };
 }
 

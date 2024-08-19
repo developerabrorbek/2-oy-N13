@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, SchemaTypes } = require("mongoose");
 
 const productSchema = new Schema(
   {
@@ -44,6 +44,10 @@ const productSchema = new Schema(
     created_at: {
       type: [Date],
       required: true,
+    },
+    user: {
+      type: SchemaTypes.ObjectId,
+      ref: "User",
     },
   },
   {

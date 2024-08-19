@@ -5,6 +5,7 @@ const productRouter = Router();
 
 productRouter
   .get("/", productController.getAllProducts)
-  .get("/stats", productController.getProductsStats);
+  .get("/stats", productController.getProductsStats)
+  .post("/add", productController.createProduct);
 
 module.exports = productRouter;
