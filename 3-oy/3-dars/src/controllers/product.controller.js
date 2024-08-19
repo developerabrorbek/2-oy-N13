@@ -1,4 +1,5 @@
 const Product = require("../models/product.model");
+const ApiFeature = require("../utils/api-features.utils");
 
 class ProductController {
   #_productModel;
@@ -8,52 +9,29 @@ class ProductController {
   }
 
   getAllProducts = async (req, res) => {
-    let query = { ...req.query };
+    const query = { ...req.query };
 
-    // Filtering
-    const excludedQueries = ["limit", "page", "sort", "fields"];
-
-    // Remove excluded fields from query
-    excludedQueries.map((efl) => delete query[efl]);
-
-    // Replacing query fields
-    query = JSON.parse(
-      JSON.stringify(query).replace(
-        /\b(lt|lte|gt|gte)\b/g,
-        (match) => `$${match}`
-      )
-    );
-
-    let databaseQuery = this.#_productModel.find(query);
-
-    // Sorting
-    if (req.query.sort) {
-      const sortFields = req.query.sort.split(",").join(" ");
-      databaseQuery = databaseQuery.sort(sortFields);
-    } else {
-      databaseQuery = databaseQuery.sort("price");
-    }
-
-    // Field limiting
-    if (req.query?.fields) {
-      const selectedFields = req.query.fields.split(",").join(" ");
-      databaseQuery = databaseQuery.select(selectedFields);
-    }
-
-    // Pagination
-    const limit = req.query?.limit || 10;
-    const offset = req.query?.page ? (req.query.page - 1) * limit : 0;
-
-    databaseQuery = databaseQuery.limit(limit).skip(offset);
+    // GET ALL FILTERED PRODUCTS COUNT
+    const allResults = await new ApiFeature(this.#_productModel.find(), query)
+      .filter()
+      .sort("price")
+      .limitFields()
+      .getQuery()
+      .countDocuments();
 
     // EXECUTE QUERY
-    const allProducts = await databaseQuery;
+    const allProducts = await new ApiFeature(this.#_productModel.find(), query)
+      .filter()
+      .sort("price")
+      .limitFields()
+      .paginate()
+      .getQuery();
 
     res.send({
       message: "success",
       page: req.query?.page || 0,
-      limit,
-      results: allProducts.length,
+      limit: req.query?.limit || 10,
+      results: allResults,
       data: allProducts,
     });
   };
