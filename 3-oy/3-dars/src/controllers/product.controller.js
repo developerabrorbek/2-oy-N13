@@ -10,7 +10,8 @@ class ProductController {
   getAllProducts = async (req, res) => {
     let query = { ...req.query };
 
-    const excludedQueries = ["limit", "page", "sort"];
+    // Filtering
+    const excludedQueries = ["limit", "page", "sort", "fields"];
 
     // Remove excluded fields from query
     excludedQueries.map((efl) => delete query[efl]);
@@ -26,24 +27,27 @@ class ProductController {
     let databaseQuery = this.#_productModel.find(query);
 
     // Sorting
-    if(req.query.sort){
-      const sortFields = req.query.sort.split(",").join(" ")
-      console.log(sortFields)
-      databaseQuery = databaseQuery.sort({"count": -1, "rating": 1})
+    if (req.query.sort) {
+      const sortFields = req.query.sort.split(",").join(" ");
+      databaseQuery = databaseQuery.sort(sortFields);
     } else {
-      databaseQuery = databaseQuery.sort("price")
+      databaseQuery = databaseQuery.sort("price");
+    }
+
+    // Field limiting
+    if (req.query?.fields) {
+      const selectedFields = req.query.fields.split(",").join(" ");
+      databaseQuery = databaseQuery.select(selectedFields);
     }
 
     // Pagination
     const limit = req.query?.limit || 10;
     const offset = req.query?.page ? (req.query.page - 1) * limit : 0;
 
-    databaseQuery = databaseQuery
-      .limit(limit)
-      .skip(offset)
-    
+    databaseQuery = databaseQuery.limit(limit).skip(offset);
+
     // EXECUTE QUERY
-    const allProducts = await databaseQuery
+    const allProducts = await databaseQuery;
 
     res.send({
       message: "success",
