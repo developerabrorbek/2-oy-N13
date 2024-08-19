@@ -1,5 +1,6 @@
 const { isValidObjectId } = require("mongoose");
 const User = require("../models/user.model");
+const ApiFeature = require("../utils/api-features.utils");
 
 class UserController {
   #_userModel;
@@ -8,13 +9,31 @@ class UserController {
     this.#_userModel = User;
   }
 
-  getAllUsers = async (_, res) => {
+  getAllUsers = async (req, res) => {
     try {
-      const allUsers = await this.#_userModel.find();
+      const query = { ...req.query };
+
+      // GET ALL FILTERED USERS COUNT
+      const allResults = await new ApiFeature(this.#_userModel.find(), query)
+        .filter()
+        .sort("first_name")
+        .limitFields()
+        .getQuery()
+        .countDocuments();
+
+      // EXECUTE QUERY
+      const allUsers = await new ApiFeature(this.#_userModel.find(), query)
+        .filter()
+        .sort("first_name")
+        .limitFields()
+        .paginate()
+        .getQuery();
 
       res.send({
-        message: "Success",
-        results: allUsers.length,
+        message: "success",
+        page: req.query?.page || 1,
+        limit: req.query?.limit || 10,
+        results: allResults,
         data: allUsers,
       });
     } catch (error) {
@@ -55,7 +74,7 @@ class UserController {
       const userId = req.params?.userId;
 
       // Checking user Id to Object ID
-      this.#_checkObjectId(userId)
+      this.#_checkObjectId(userId);
 
       const foundedUser = await this.#_userModel.findById(userId);
 
@@ -99,7 +118,7 @@ class UserController {
       const userId = req.params?.userId;
 
       // Checking user Id to Object ID
-      this.#_checkObjectId(userId)
+      this.#_checkObjectId(userId);
 
       await this.#_userModel.findByIdAndDelete(userId);
 
@@ -114,12 +133,12 @@ class UserController {
   };
 
   #_checkObjectId = (id) => {
-    if(!isValidObjectId(id)) {
-      throw new Error(`Id: ${id} is not a valid object id`)
+    if (!isValidObjectId(id)) {
+      throw new Error(`Id: ${id} is not a valid object id`);
     }
 
     return null;
-  }
+  };
 }
 
 module.exports = new UserController();

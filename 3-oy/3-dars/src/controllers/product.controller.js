@@ -35,6 +35,40 @@ class ProductController {
       data: allProducts,
     });
   };
+
+  getProductsStats = async (req, res) => {
+    const statistics = await this.#_productModel.aggregate([
+      {
+        $match: {
+          rating: {
+            $gte: 3,
+          },
+          price: {
+            $lt: 5000000
+          },
+          title: /^a/
+        },
+      },
+      {
+        $group: {
+          _id:  "$color",
+          soni: { $sum: 1 },
+          avgPrice: { $avg: "$price"},
+          minProductPrice: { $min: "$price"},
+        },
+      },
+      {
+        $sort: {
+          price: 1,
+        },
+      },
+    ]);
+
+    res.send({
+      message: "success",
+      data: statistics,
+    });
+  };
 }
 
 module.exports = new ProductController();

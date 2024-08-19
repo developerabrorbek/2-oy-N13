@@ -1,6 +1,5 @@
 class ApiFeature {
   #_query;
-  #_allResultsQuery
   #_queryString;
 
   constructor(query, queryString) {
