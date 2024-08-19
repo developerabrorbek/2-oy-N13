@@ -25,16 +25,25 @@ class ProductController {
 
     let databaseQuery = this.#_productModel.find(query);
 
+    // Sorting
+    if(req.query.sort){
+      const sortFields = req.query.sort.split(",").join(" ")
+      console.log(sortFields)
+      databaseQuery = databaseQuery.sort({"count": -1, "rating": 1})
+    } else {
+      databaseQuery = databaseQuery.sort("price")
+    }
+
     // Pagination
     const limit = req.query?.limit || 10;
     const offset = req.query?.page ? (req.query.page - 1) * limit : 0;
 
-    const allProducts = await databaseQuery
+    databaseQuery = databaseQuery
       .limit(limit)
       .skip(offset)
-
-    // Sorting
     
+    // EXECUTE QUERY
+    const allProducts = await databaseQuery
 
     res.send({
       message: "success",
